@@ -54,6 +54,8 @@ void setup()
   BLE_Setup();
 }
 
+uint32_t next_time = 0;
+
 // Main loop
 void loop()
 {
@@ -82,8 +84,12 @@ void loop()
     pixels.fill(pixels.ColorHSV(state->getColor(0),255,val2+5));
   }
 
-  //Display leds
-  pixels.show();
+  if(next_time < current_time)
+  {
+    //Display leds
+    pixels.show();
+    next_time = current_time+100;
+  }
 }
 
 
